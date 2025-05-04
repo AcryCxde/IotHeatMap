@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тепловая карта</title>
+    <script src="/static/js/heatmap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header>
+    <h1>Тепловая карта</h1>
+    <p>Актуальное распределение тепла в серверной</p>
+</header>
+<div id="tooltip"></div>
+<main>
+  <div class="heatmap-wrapper">
+    <div id="heatmapContainer">
+      <div id="heatmapCanvas"></div>
+    </div>
+    <div class="legend-block">
+  <div class="legend-title">Температура</div>
+  <div class="legend-container">
+    <div class="legend"></div>
+    <div class="legend-labels">
+      <span>40°C</span>
+      <span>25°C</span>
+      <span>15°C</span>
+    </div>
+  </div>
+</div>
+
+</div>
+</main>
+
+
+<footer>
+    <p>&copy; 2025 Тепловая карта. Интернет-вещей.</p>
+</footer>
+
+<script>
+    const heatmap = h337.create({
+        container: document.getElementById('heatmapCanvas'),
+        radius: 20
+    });
+
+    const WIDTH = 100;
+    const HEIGHT = 100;
+    let currentData = [];
+
+    async function fetchDataAndRender() {
+        try {
+            const res = await fetch('/api/heatmap');
+            const data = await res.json();
+            currentData = data;
+
+            const points = data.map(p => ({
+                x: Math.round(p.x / WIDTH * 800),
+                y: Math.round(p.y / HEIGHT * 600),
+                value: p.value
+            }));
+
+            heatmap.setData({
+                max: 60,
+                min: 20,
+                data: points
+            });
+        } catch (e) {
+            console.error('Ошибка при получении данных:', e);
+        }
+    }
+
+    const tooltip = document.getElementById('tooltip');
+    const canvas = document.getElementById('heatmapCanvas');
+
+    canvas.addEventListener('mousemove', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const nearest = currentData.reduce((closest, point) => {
+            const px = point.x / WIDTH * 800;
+            const py = point.y / HEIGHT * 600;
+            const dist = Math.hypot(px - x, py - y);
+            return dist < closest.dist ? { ...point, dist } : closest;
+        }, { dist: Infinity });
+
+        if (nearest.dist < 20) {
+            tooltip.style.left = `${event.clientX + 15}px`;
+            tooltip.style.top = `${event.clientY + 15}px`;
+            tooltip.style.display = 'block';
+            tooltip.innerText = `${nearest.value.toFixed(1)} °C`;
+        } else {
+            tooltip.style.display = 'none';
+        }
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+    });
+
+    setInterval(fetchDataAndRender, 1000);
+    fetchDataAndRender();
+</script>
+</body>
+</html>
