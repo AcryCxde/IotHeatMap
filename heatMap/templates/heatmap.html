@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Тепловая карта</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/static/js/heatmap.min.js"></script>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 <header>
-    <h1>Тепловая карта</h1>
-    <p>Актуальное распределение тепла в серверной</p>
+    <h1>Тепловая карта серверной</h1>
+    <p>Тепловая карта в настоящем времени транслирует температуру в серверной</p>
 </header>
+
 <div id="tooltip"></div>
+
 <main>
-  <div class="heatmap-wrapper">
-    <div id="heatmapContainer">
-      <div id="heatmapCanvas"></div>
-    </div>
-    <div class="legend-block">
-  <div class="legend-title">Температура</div>
-  <div class="legend-container">
-    <div class="legend"></div>
-    <div class="legend-labels">
-      <span>40°C</span>
-      <span>25°C</span>
-      <span>15°C</span>
-    </div>
-  </div>
-</div>
+    <div class="heatmap-wrapper">
+        <div id="heatmapContainer">
+            <div id="heatmapCanvas"></div>
+        </div>
 
-</div>
+        <div class="legend-block">
+            <div class="legend-title">Температура</div>
+            <div class="legend-container">
+                <div class="legend"></div>
+                <div class="legend-labels">
+                    <span>40°C</span>
+                    <span>25°C</span>
+                    <span>15°C</span>
+                </div>
+            </div>
+            <div class="model-link">
+                <a href="https://dev.rightech.io/#?m=models-v3&v=model&id=681659fc20b46dbb6c1f68a6&n=root&t=ric-logic-v3" target="_blank">Открыть модель Rightech</a>
+            </div>
+
+            <div class="feedback-block">
+                <h3>Обратная связь</h3>
+                <p>Заметили перегрев или хотите сообщить о неисправности оборудования?</p>
+                <a class="telegram-link" href="https://t.me/gphvl" target="_blank">Написать в Telegram</a>
+            </div>
+        </div>
+    </div>
 </main>
-
 
 <footer>
     <p>&copy; 2025 Тепловая карта. Интернет-вещей.</p>
@@ -98,7 +109,7 @@
         tooltip.style.display = 'none';
     });
 
-    setInterval(fetchDataAndRender, 1000);
+    setInterval(fetchDataAndRender, 5000);
     fetchDataAndRender();
 </script>
 </body>

@@ -1,7 +1,7 @@
 import aiohttp
 import numpy as np
 from config import *
-from sensors.server import get_name_objects
+from server import get_name_objects
 
 
 class TemperatureMap:

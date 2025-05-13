@@ -1,0 +1,145 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f6fb;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 16px;
+}
+
+main {
+    padding: 20px;
+}
+
+#heatmapCanvas {
+    width: 800px;
+    height: 600px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    background: url("/static/heatMap.png") no-repeat;
+}
+
+.heatmap-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.legend-block {
+    width: 220px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.legend-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.legend-container {
+    margin-bottom: 10px;
+}
+
+.legend {
+    height: 20px;
+    background: linear-gradient(to right, blue, lightgreen, red);
+    border-radius: 6px;
+}
+
+.legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.model-link {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.model-link a {
+    color: #2e86de;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.model-link a:hover {
+    text-decoration: underline;
+}
+
+.feedback-block {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.feedback-block h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.feedback-block p {
+    margin: 10px 0;
+}
+
+.telegram-link {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #0088cc;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.telegram-link:hover {
+    background-color: #0077b6;
+}
+
+#tooltip {
+    position: fixed;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    pointer-events: none;
+    display: none;
+    z-index: 1000;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+    color: white;
+    margin-top: 40px;
+}
