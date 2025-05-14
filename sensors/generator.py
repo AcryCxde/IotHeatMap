@@ -33,8 +33,8 @@ class DataGenerator:
         self.hum = initial_hum
 
     async def next_data(self):
-        self.temp = round(self.temp + random.uniform(-0.3, 0.3), 2)
-        self.hum = round(self.hum + random.uniform(-0.3, 0.3), 2)
+        self.temp = round(self.temp + random.uniform(-0.3, 1.3), 2)
+        self.hum = round(self.hum + random.uniform(-0.3, 1.3), 2)
         logger.debug(f"Generated new data: temp={self.temp}, hum={self.hum}")
         return self.temp, self.hum
 
